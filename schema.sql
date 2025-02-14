@@ -1,20 +1,20 @@
--- Tablica za kategorije proizvoda (npr. torte, kolači, peciva)
+-- kategorije proizvoda 
 CREATE TABLE IF NOT EXISTS kategorije (
     id INT AUTO_INCREMENT PRIMARY KEY,
     naziv VARCHAR(255) NOT NULL
 );
 
--- Tablica za proizvode
+-- proizvodi
 CREATE TABLE IF NOT EXISTS proizvodi (
     id INT AUTO_INCREMENT PRIMARY KEY,
     naziv VARCHAR(255) NOT NULL,
     opis TEXT,
-    cijena DECIMAL(10,2) NOT NULL,
+    cijena INT NOT NULL,
     kategorija_id INT,
     FOREIGN KEY (kategorija_id) REFERENCES kategorije(id) ON DELETE SET NULL
 );
 
--- Tablica za kupce
+-- kupci
 CREATE TABLE IF NOT EXISTS kupci (
     id INT AUTO_INCREMENT PRIMARY KEY,
     ime VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS kupci (
     email VARCHAR(255) NOT NULL UNIQUE
 );
 
--- Tablica za narudžbe
+-- narudžbe
 CREATE TABLE IF NOT EXISTS narudzbe (
     id INT AUTO_INCREMENT PRIMARY KEY,
     kupac_id INT NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS narudzbe (
     FOREIGN KEY (kupac_id) REFERENCES kupci(id) ON DELETE CASCADE
 );
 
--- Tablica za stavke narudžbe (poveznica između narudžbi i proizvoda)
+-- stavke narudžbe
 CREATE TABLE IF NOT EXISTS narudzba_proizvodi (
     id INT AUTO_INCREMENT PRIMARY KEY,
     narudzba_id INT NOT NULL,
